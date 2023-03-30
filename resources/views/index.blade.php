@@ -494,37 +494,7 @@
                     </div>
 
 
-                    <div id="page2">
-                        <p>Lorem ipsum dolor sit amet.</p>
-                    </div>
-                    <!--end div 1-->
-                    <div id="page3">
-                        <p>Lorem ipsum dolor sit amet. 1</p>
-                    </div>
-                    <!--end div 2-->
-                    <div id="page4">
-                        <p>Lorem ipsum dolor sit amet. 2</p>
-                    </div>
-                    <!--end div 3-->
-                    <div id="page5">
-                        <p>Lorem ipsum dolor sit amet. 3</p>
-                    </div>
-                    <!--end div 4-->
-
-                    <div class="container">
-                        <div class="text-center">
-                            <ul class="pagination pagination-lg">
-
-                                <li onclick="showPages('1')"> 1 </li>
-                                <li onclick="showPages('2')"> 2 </li>
-                                <li onclick="showPages('3')"> 3 </li>
-                                <li onclick="showPages('4')"> 4 </li>
-                                <li onclick="showPages('5')"> 5 </li>
-                                
-
-                            </ul>
-                        </div>
-                    </div>
+                     
 
                 </div>
             </div>
