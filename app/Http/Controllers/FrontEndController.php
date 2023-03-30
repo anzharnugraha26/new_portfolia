@@ -83,8 +83,8 @@ class FrontEndController extends Controller
     function fetch_data(Request $request)
     {
         if ($request->ajax()) {
-            $data = DB::table('articles_categories')->paginate(2);
-            return view('test', compact('data'))->render();
+            $pr = DB::table('project')->paginate(3);
+            return view('test', compact('pr'))->render();
         }
     }
 }

@@ -431,7 +431,7 @@
 
         <section class="projects section-padding" id="section_4">
             <div class="container">
-                <div class="row">
+                <div class="row" id="table_data">
 
                     <div class="col-lg-8 col-md-8 col-12 ms-auto" data-aos="zoom-in">
                         <div class="section-title-wrap d-flex justify-content-center align-items-center mb-4">
@@ -444,57 +444,38 @@
 
                     <div class="clearfix"></div>
 
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="projects-thumb">
-                            <div class="projects-info">
-                                <small class="projects-tag text-white">Job Portal Website</small>
+                    <?php $pr = DB::table('project')->paginate(3); ?>
+                   
+                    @foreach ($pr as $i)
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="projects-thumb">
+                                <div class="projects-info">
+                                    <small class="projects-tag text-white">{{ $i->jenis }}</small>
 
-                                <h3 class="projects-title">gawe.id</h3>
+                                    <h3 class="projects-title">{{ $i->nama }}</h3>
+                                </div>
+
+                                <a href="{{ $i->url }}" target="_blank" class="">
+                                    <img src="{{ asset('element/tmp/images/' . $i->image) }}"
+                                        class="projects-image img-fluid" alt="">
+                                </a>
                             </div>
+                        </div>
+                    @endforeach
 
-                            <a href="https://gawe.id/" target="_blank" class="">
-                                <img src="{{ asset('element/tmp/images/gawe.png') }}" class="projects-image img-fluid"
-                                    alt="">
-                            </a>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {!! $pr->links() !!}
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="projects-thumb">
-                            <div class="projects-info">
-                                <small class="projects-tag text-white">Webiste Gallery Perusahaan</small>
-
-                                <h3 class="projects-title">Gallery Sim</h3>
-                            </div>
-
-                            <a href="https://gallery.sim.co.id/login" target="_blank">
-                                <img src="{{ asset('element/tmp/images/gallery.png') }}"
-                                    class="projects-image img-fluid" alt="">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="projects-thumb">
-                            <div class="projects-info">
-                                <small class="projects-tag text-white">Website Company Profile</small>
-
-                                <h3 class="projects-title">Pesona Mahameru</h3>
-                            </div>
-
-                            <a href="https://www.pesonamahameru.com/" target="_blank">
-                                <img src="{{ asset('element/tmp/images/pesona.png') }}"
-                                    class="projects-image img-fluid" alt="">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 justify-content-center">
-                        <a href="" class="btn btn-primary">View All Project</a>
-                    </div>
 
 
-                     
+
+
+                    
+
+
 
                 </div>
             </div>
@@ -731,6 +712,26 @@
                 document.getElementById('page' + id).style.display = 'block';
             }
         };
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            $(document).on('click', '.pagination a', function(event) {
+                event.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
+                fetch_data(page);
+            });
+
+            function fetch_data(page) {
+                $.ajax({
+                    url: "/pagination/fetch_data?page=" + page,
+                    success: function(data) {
+                        $('#table_data').html(data);
+                    }
+                });
+            }
+
+        });
     </script>
 
 </body>

@@ -1,51 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="row" id="table_data">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-</head>
+    <div class="col-lg-8 col-md-8 col-12 ms-auto" data-aos="zoom-in">
+        <div class="section-title-wrap d-flex justify-content-center align-items-center mb-4">
+            <img src="{{ asset('element/tmp/images/white-desk-work-study-aesthetics.jpg') }}"
+                class="avatar-image img-fluid" alt="">
 
-<body>
-    <!-- data.blade.php -->
-    <div id="table_data">
-        @foreach ($data as $item)
-            <h1 id="data-container">{{ $item->name }}</h1>
-        @endforeach
-
-        {!! $data->links() !!}
+            <h2 class="text-white ms-4 mb-0">Projects</h2>
+        </div>
     </div>
 
-    <div id="pagination-links">
-        <!-- The pagination links will be loaded here -->
+    <div class="clearfix"></div>
+
+    
+   
+    @foreach ($pr as $i)
+        <div class="col-lg-4 col-md-6 col-12">
+            <div class="projects-thumb">
+                <div class="projects-info">
+                    <small class="projects-tag text-white">{{ $i->jenis }}</small>
+
+                    <h3 class="projects-title">{{ $i->nama }}</h3>
+                </div>
+
+                <a href="{{ $i->url }}" target="_blank" class="">
+                    <img src="{{ asset('element/tmp/images/' . $i->image) }}"
+                        class="projects-image img-fluid" alt="">
+                </a>
+            </div>
+        </div>
+    @endforeach
+
+    <div class="row">
+        <div class="col-md-6">
+            {!! $pr->links() !!}
+        </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
 
-            $(document).on('click', '.pagination a', function(event) {
-                event.preventDefault();
-                var page = $(this).attr('href').split('page=')[1];
-                fetch_data(page);
-            });
-
-            function fetch_data(page) {
-                $.ajax({
-                    url: "/pagination/fetch_data?page=" + page,
-                    success: function(data) {
-                        $('#table_data').html(data);
-                    }
-                });
-            }
-
-        });
-    </script>
-
-
-</body>
-
-</html>
+</div>
